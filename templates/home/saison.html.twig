@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '/inc/modal.html.twig' %}
+    {% include '/inc/modaldeco.html.twig' %}
+    {% include '/inc/addteammodal.html.twig' %}
+    {% include '/inc/addmatchmodal.html.twig' %}
+    {% include '/inc/stopteam.html.twig' %}
+    <div class="leftbar">
+
+        <a href="{{ path('home') }}">
+            <center>
+                {% if site.sitelogo == '' %}
+                    <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                {% else %}
+                    <img src="{{ site.sitelogo }}" class="logo"/>
+                {% endif %}
+            </center><br></a>
+
+        <div class="pagename">administration</div>
+
+        <div class="clubname">
+            {% if club.clubname == '' %}
+                {{ cmsname }}
+                {{ version }}
+            {% else %}
+                {{ club.clubname }}
+            {% endif %}
+        </div>
+        {% include 'inc/nav.html.twig' %}
+    </div>
+
+    <div class="block">
+
+        {% include 'inc/navtop.html.twig' %}
+
+        <div class="restpage">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    group
+                                </span>&nbsp;équipes</div>
+
+                            <div class="simplebloccontent nopadd freesize">
+                                <table>
+                                    <tr>
+                                        <th>LOGO</th>
+                                        <th>NOM</th>
+                                        <th>T</th>
+                                        <th>V</th>
+                                        <th>D</th>
+                                        <th>N</th>
+                                        <th>MATCHS</th>
+                                        <th>
+                                            <a
+                                                href="#"
+                                                data-toggle="modal"
+                                                {% if nbteams > 7 %}
+                                                data-target="#exampleModal60"
+                                                {% else %}
+                                                 data-target="#exampleModal50"
+                                                {% endif %}>
+                                                <span class="material-icons iconwhite">post_add</span></a>
+                                        </th>
+                                    </tr>
+                                    {% if teams != NULL %}
+                                        {% for id in teams %}
+
+                                            <tr>
+                                                <td><img class="teamlogosmall" src="../docs/{{ id.TLogo }}"/></td>
+                                                <td><b>{{ id.TName|upper }}</b></td>
+                                                <td>{{ id.TTotalMatchs}}</td>
+                                                <td>{{ id.Twin }}</td>
+                                                <td>{{ id.Tlose }}</td>
+                                                <td>{{ id.TNul }}</td>
+                                                <td>{{ id.TPts }}</td>
+                                                <td>
+                                                    <a href="{{ path('delete_team', { 'id': id.id }) }}">
+                                                        <span class="material-icons">
+                                                            delete
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="{{ path('modif_team', { 'id': id.id }) }}">
+                                                        <span class="material-icons">
+                                                            edit
+                                                        </span>
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td>Il n'y a pas d'équipe pour le moment. Ajoutez-en une !</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    sports_rugby
+                                </span>&nbsp;tous les matchs</div>
+
+                            <div class="simplebloccontent nopadd">
+                                <table>
+                                    <tr>
+                                        <th>DATE</th>
+                                        <th>DOM</th>
+                                        <th>&nbsp;</th>
+                                        <th>EXT</th>
+                                        <th>TYPE</th>
+                                        <th>RESULTAT</th>
+                                        <th>F. MATCH</th>
+                                        <th>
+                                            <a href="#" data-toggle="modal" data-target="#exampleModal80">
+                                            <span class="material-icons iconwhite">post_add</span></a>
+                                        </th>
+                                    </tr>
+                                    {% if matchs != NULL %}
+                                        {% for id in matchs %}
+
+                                            <tr>
+                                                <td>{{ id.MatchDate|date('d/m/Y') }}</td>
+                                                <td>{{ id.MatchDom }}</td>
+                                                <td>vs</td>
+                                                <td>{{ id.MatchExt }}</td>
+                                                <td><span class="badge badge-secondary" style="font-size:12px">{{ id.MatchType}}</span></td>
+                                                <td><a href="#">
+                                                    <span class="material-icons">
+                                                        add_circle_outline
+                                                    </span></a>
+                                                </td>
+                                                <td>
+                                                    <a href="#">
+                                                    <span class="material-icons">
+                                                        add_circle_outline
+                                                    </span></a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ path('delete_match', { 'id': id.id }) }}">
+                                                        <span class="material-icons">
+                                                            delete
+                                                        </span>
+                                                    </a>
+
+                                                    <a href="#">
+                                                        <span class="material-icons">
+                                                            edit
+                                                        </span>
+                                                    </a>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr>
+                                            <td>Il n'y a pas de match pour le moment. Ajoutez-en un !</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

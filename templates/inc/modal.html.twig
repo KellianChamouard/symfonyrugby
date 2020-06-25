@@ -1,0 +1,34 @@
+<!-- Modal profil -->
+<div
+    class="modal fade"
+    id="exampleModal2"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="simplebloc modalsize">
+                <div class="simplebloctitle">
+                    <span class="material-icons">
+                        person
+                    </span>&nbsp; {{ app.user.firstname }} {{ app.user.lastname }}
+                </div>
+                <div class="simplebloccontent freesize">
+                    <p>Email :
+                        {{ app.user.username }}</p>
+                    <p>Role :
+                        {% if is_granted("ROLE_ADMIN") %}
+                            Administrateur
+                        {% elseif is_granted("ROLE_USER") %}
+                            Utilisateur
+                        {% else %}
+                            Visiteur
+                        {% endif %}
+                    </p>
+<button type="button" class="btn btn-secondary" data-dismiss="modal">QUITTER</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

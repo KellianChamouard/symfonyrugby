@@ -1,0 +1,31 @@
+<div class="navbar">
+
+    <div class="searchzone">
+      <!--  <form>
+            <input type="text" name="" id="search"
+            placeholder="Rechercher..."></form>-->
+        </div>
+        <div class="userbox">
+            {% if app.user.avatar == 'avataradmin' %}
+
+                {% include 'inc/avatar.svg.twig' %}
+
+            {% else %}
+                <img src="{{ app.user.avatar }}" class="profilepic">
+            {% endif %}
+            <div class="rightbox">
+                <ul class="rightalign">
+                    <a href="#" data-toggle="modal" data-target="#exampleModal2">
+                        <li class="listnormal">mon Profil<span class="material-icons iconsheight">person</span>
+                        </li>
+                    </a>
+                    <a href="#">
+                        <li class="listnormal clubcolor">
+                            <a href="#" data-toggle="modal" data-target="#exampleModal5">Déconnexion</a>
+                            <span class="material-icons iconsheight clubcolor">power_settings_new</span>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>

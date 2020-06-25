@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '/inc/modal.html.twig' %}
+    {% include '/inc/modaldeco.html.twig' %}
+    <div class="leftbar">
+
+        <a href="{{ path('home') }}">
+            <center>
+                {% if site.sitelogo == '' %}
+                    <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                {% else %}
+                    <img src="{{ site.sitelogo }}" class="logo"/>
+                {% endif %}
+            </center><br></a>
+
+        <div class="pagename">administration</div>
+
+        <div class="clubname">
+            {% if club.clubname == '' %}
+                {{ cmsname }}
+                {{ version }}
+            {% else %}
+                {{ club.clubname }}
+            {% endif %}
+        </div>
+        {% include 'inc/nav.html.twig' %}
+    </div>
+
+    <div class="block">
+
+        {% include 'inc/navtop.html.twig' %}
+
+        <div class="restpage">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    people
+                                </span>&nbsp;Réseaux Sociaux</div>
+
+                            <div class="simplebloccontent">
+                                {{ form(form) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 padd">
+                            <div class="simplebloc">
+                                <div class="simplebloctitle">
+                                    <span class="material-icons">
+                                        camera_alt
+                                    </span>&nbsp;instagram</div>
+
+                                <div class="simplebloccontent">
+                                    installer api instagram
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-4 padd">
+                            <div class="simplebloc">
+                                <div class="simplebloctitle">
+                                    <span class="material-icons">
+                                        rss_feed
+                                    </span>&nbsp;Facebook</div>
+                                {% if social.facebook == "" %}
+                                <div class="simplebloccontent">
+                                    Veuillez renseigner un lien facebook.
+                                    {% else %}
+                                    <div class="simplebloccontent nopadd center">
+                                        <div
+                                            class="fb-page"
+                                            data-href="{{ social.facebook }}"
+                                            data-tabs="timeline"
+                                            data-width=""
+                                            data-height="300px"
+                                            data-small-header="false"
+                                            data-adapt-container-width="true"
+                                            data-hide-cover="false"
+                                            data-show-facepile="true">
+                                            <blockquote
+                                                cite="https://www.facebook.com/BelvezeRazes13"
+                                                class="fb-xfbml-parse-ignore">
+                                                <a href="https://www.facebook.com/BelvezeRazes13">Belvèze Razes XIII MJC</a>
+                                            </blockquote>
+                                        </div>
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                                                    <div class="col-4 padd">
+                            <div class="simplebloc">
+                                <div class="simplebloctitle">
+                                    <span class="material-icons">
+                                        rss_feed
+                                    </span>&nbsp;Twitter</div>
+                            
+                                <div class="simplebloccontent">
+                                   Inserer api twitter
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                                    <div class="col-4 padd">
+                            <div class="simplebloc">
+                                <div class="simplebloctitle">
+                                    <span class="material-icons">
+                                        rss_feed
+                                    </span>&nbsp;Youtube</div>
+                            
+                                <div class="simplebloccontent">
+                                   Inserer api twitter
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endblock %}
+
+            {% block javascripts %}
+
+                <div id="fb-root"></div>
+                <script
+                    async="async"
+                    defer="defer"
+                    crossorigin="anonymous"
+                    src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0"
+                    nonce="urCcckdW"></script>
+
+            {% endblock %}

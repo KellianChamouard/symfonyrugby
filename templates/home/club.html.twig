@@ -1,0 +1,139 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '/inc/modalclub.html.twig' %}
+    {% include '/inc/modal.html.twig' %}
+        {% include '/inc/modaldeco.html.twig' %}
+    <div class="leftbar">
+
+        <a href="{{ path('home') }}">
+            <center>
+                {% if site.sitelogo == '' %}
+                    <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                {% else %}
+                    <img src="{{ site.sitelogo }}" class="logo"/>
+                {% endif %}
+            </center><br></a>
+
+        <div class="pagename">administration</div>
+
+        <div class="clubname">
+            {% if club.clubname == '' %}
+                {{ cmsname }}
+                {{ version }}
+            {% else %}
+                {{ club.clubname }}
+            {% endif %}
+        </div>
+        {% include 'inc/nav.html.twig' %}
+    </div>
+
+    <div class="block">
+
+        {% include 'inc/navtop.html.twig' %}
+
+        <div class="restpage">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    settings
+                                </span>&nbsp;Le Club</div>
+                            <div class="simplebloccontent">
+
+                                <table>
+                                    <tr>
+                                        <td class="infosclub bgwhite">nom du club :</td>
+                                        <td class="infosclubresp">
+                                            {% if club.clubname == '' %}
+                                                Veuillez définir un nom.
+                                            {% else %}
+                                                {{ club.clubname }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">championnat du club :</td>
+                                        <td class="infosclubresp">
+                                            {% if club.clubcc == '' %}
+                                                Veuillez définir un championnat.
+                                            {% else %}
+                                                {{ club.clubcc }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">adresse du club :</td>
+                                        <td class="infosclubresp">
+                                            {% if club.clubadress == '' %}
+                                                Veuillez définir une adresse.
+                                            {% else %}
+                                                {{ club.clubadress }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">pays du club :</td>
+                                        <td class="infosclubresp">
+                                            {% if club.clubcountry == '' %}
+                                                Veuillez définir un pays.
+                                            {% else %}
+                                                {{ club.clubcountry }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">numéro de téléphone du club :</td>
+                                        <td class="infosclubresp">
+                                            {% if club.clubphone == '' %}
+                                                Veuillez définir un numéro de téléphone.
+                                            {% else %}
+                                                {{ club.clubphone }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">adresse mail du club :</td>
+                                        <td class="infosclubresp">
+                                            {% if club.clubmail == '' %}
+                                                Veuillez définir une adresse mail.
+                                            {% else %}
+                                                {{ club.clubmail }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub" style="background-color:white">&nbsp;</td>
+                                        <td class="infosclubresp" style="background-color:white">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub" style="background-color:white">&nbsp;</td>
+                                        <td class="infosclubresp" style="background-color:white">
+                                            <a
+                                                href="#"
+                                                data-toggle="modal"
+                                                data-target="#exampleModal4"
+                                                style="color:var(--first-color)">
+                                                <span class="material-icons iconsheight">
+                                                    edit
+                                                </span>
+                                                ÉDITER LES INFOS
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endblock %}

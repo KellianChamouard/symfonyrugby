@@ -1,0 +1,175 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{% include '/inc/modal.html.twig' %}
+    {% include '/inc/modaldeco.html.twig' %}
+    {% include '/inc/adddirigmodal.html.twig' %}
+<div class="leftbar">
+
+            <a href="{{ path('home') }}"><center>{% if site.sitelogo == '' %}
+                                                <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                                            {% else %}
+                                                <img src="{{ site.sitelogo }}" class="logo"/>
+                                            {% endif %}</center><br></a>
+
+            <div class="pagename">administration</div>
+
+<div class="clubname">
+            {% if club.clubname == '' %}
+{{ cmsname }} {{ version }}
+{% else %}
+{{ club.clubname }}
+{% endif %}
+            </div>
+{% include 'inc/nav.html.twig' %}
+        </div>
+
+        <div class="block">
+
+            {% include 'inc/navtop.html.twig' %}
+
+           <div class="restpage">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        <div class="col-12 padd">
+                            <div class="simplebloc">
+                                <div class="simplebloctitle">
+                                    <span class="material-icons">
+                                        person
+                                    </span>&nbsp;Dirigeants</div>
+
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button
+                                                    class="btn btn-link"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseTwo"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseTwo">
+                                                    PRÉSIDENTS
+                                                </button>
+                                            </h2>
+                                        </div>
+
+                                        <div
+                                            id="collapseTwo"
+                                            class="collapse"
+                                            aria-labelledby="headingTwo"
+                                            data-parent="#accordionExample">
+                                                {% if president == NULL %}
+                                                <div class="card-body">
+                                                    <a href="#" data-toggle="modal" data-target="#exampleModal40">
+                                                        <span class="material-icons">person_add_alt_1</span></a>
+                                                {% else %}
+                                                <div class="card-body nopadd">
+                                                                                    <table>
+                                                    <tr>
+                                                        <th>PHOTO</th>
+                                                        <th>NOM</th>
+                                                        <th>PRÉNOM</th>
+                                                        <th>
+                                                            <a href="#" data-toggle="modal" data-target="#exampleModal40">
+                                                                <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                        </th>
+                                                    </tr>
+                                                    {% for id in president %}
+                                                        <tr>
+                                                            <td><img src="../docs/{{ id.DirigPhoto }}"/></td>
+                                                            <td>{{ id.DirigName|upper }}</td>
+                                                            <td>{{ id.DirigFirstname|upper }}</td>
+                                                            <td>
+                                                                <a href="{{ path('delete_dirig', { 'id': id.id }) }}">
+                                                                    <span class="material-icons">
+                                                                        delete
+                                                                    </span>
+                                                                </a>
+                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                    <span class="material-icons">
+                                                                        edit
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <button
+                                                    class="btn btn-link"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseOne"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    CO-PRÉSIDENTS
+                                                </button>
+                                            </h2>
+                                        </div>
+
+                                        <div
+                                            id="collapseOne"
+                                            class="collapse"
+                                            aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body nopadd">
+                                                {% if copresident == NULL %}
+                                                <div class="card-body">
+                                                    <a href="#" data-toggle="modal" data-target="#exampleModal40">
+                                                        <span class="material-icons">person_add_alt_1</span></a>
+                                                {% else %}
+                                                <div class="card-body nopadd">
+                                                                                    <table>
+                                                    <tr>
+                                                        <th>PHOTO</th>
+                                                        <th>NOM</th>
+                                                        <th>PRÉNOM</th>
+                                                        <th>
+                                                            <a href="#" data-toggle="modal" data-target="#exampleModal40">
+                                                                <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                        </th>
+                                                    </tr>
+                                                    {% for id in copresident %}
+                                                        <tr>
+                                                            <td><img src="../docs/{{ id.DirigPhoto }}"/></td>
+                                                            <td>{{ id.DirigName|upper }}</td>
+                                                            <td>{{ id.DirigFirstname|upper }}</td>
+                                                            <td>
+                                                                <a href="{{ path('delete_dirig', { 'id': id.id }) }}">
+                                                                    <span class="material-icons">
+                                                                        delete
+                                                                    </span>
+                                                                </a>
+                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                    <span class="material-icons">
+                                                                        edit
+                                                                    </span>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+{% endblock %}

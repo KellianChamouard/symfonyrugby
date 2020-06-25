@@ -1,0 +1,284 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '/inc/modal.html.twig' %}
+    {% include '/inc/modaldeco.html.twig' %}
+    {% include '/inc/modalnote.html.twig' %}
+    <div id="fb-root"></div>
+    <script
+        async="async"
+        defer="defer"
+        crossorigin="anonymous"
+        src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0"
+        nonce="LShEe8er"></script>
+
+    <div class="leftbar">
+
+        <a href="{{ path('home') }}">
+            <center>
+                {% if site.sitelogo == '' %}
+                    <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                {% else %}
+                    <img src="{{ site.sitelogo }}" class="logo"/>
+                {% endif %}
+            </center><br></a>
+
+        <div class="pagename">administration</div>
+
+        <div class="clubname">
+            {% if club.clubname == '' %}
+                {{ cmsname }}
+                {{ version }}
+            {% else %}
+                {{ club.clubname }}
+            {% endif %}
+        </div>
+
+        {% include 'inc/nav.html.twig' %}
+
+    </div>
+
+    <div class="block">
+
+        {% include 'inc/navtop.html.twig' %}
+
+        <div class="restpage">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-8 col-sm-8 col-md-7 col-lg-7 col-xl-5 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    info
+                                </span>&nbsp;Informations</div>
+                            <div class="simplebloccontent blocksize">
+                                <div class="clubcolor">
+                                    <h6>
+                                        <b>{{ cmsname }}
+                                            {{ version }}</b>
+                                    </h6><hr></div>
+                                <p>Bienvenu(e)
+                                    <b>{{ app.user.firstname }}
+                                        {{ app.user.lastname }}</b>
+                                    ! Vous êtes sur l'Administration du site internet
+
+                                    {% if club.clubname == '' %}
+                                        <b>{{ cmsname }}
+                                            {{ version }}</b>
+                                    {% else %}
+                                        de
+                                        <b>{{ club.clubname }}</b>
+                                    {% endif %}
+                                    . Vous trouverez dans cet espace tout ce dont vous avez besoin pour gérer votre
+                                    site comme il se doit. Vous pourrez ajouter des articles, des joueurs, etc...</p>
+                                <p>Vous pouvez trouver
+                                    <b>
+                                        <a href="#" class="secondlink">ici</a>
+                                    </b>
+                                    une vidéo explicative sur la prise en main de l'Administration.</p>
+                                <p>Si cependant des questions persistent, vous pouvez nous contacter par mail
+                                    <b>
+                                        <a
+                                            href="mailto:contact@kellian-chamouard.fr?subject=HELP CENTER SITE : Belvèze Razes XIII"
+                                            class="secondlink">ici</a>
+                                    </b>
+                                    ou par téléphone
+                                    <b>
+                                        <a href="tel:0778907411" class="secondlink">ici</a>
+                                    </b>.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 col-sm-4 col-md-5 col-lg-5 col-xl-7 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    notes
+                                </span>&nbsp;notes
+                                <a
+                                    href="#"
+                                    data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    style="color:var(--first-color);font-weight:bolder;">
+                                    <span
+                                        class="badge badge-primary"
+                                        style="background-color:var(--first-color);width:13px;">+</span>
+                                </a>
+                            </div>
+                            <div class="simplebloccontent scrollon blocksize">
+
+                                <div class="alert alert-clubcolor alert-dismissible fade show" role="alert">
+
+                                    <b>⚠</b>
+                                    Pensez à bien tenir à jour toutes les informations du club ainsi que tous les
+                                    matchs et résultats.
+
+                                </div>
+
+                                {% if notes == NULL %}
+
+                                    <div class="alert alert-clubcolor alert-dismissible fade show" role="alert">
+
+                                        Pas de note pour le moment ! Ajoutez-en une !
+
+                                    </div>
+
+                                {% else %}
+                                    {% for id in notes %}
+                                        <div class="alert alert-clubcolor alert-dismissible fade show" role="alert">
+                                            <strong class="clubcolor">{{ id.datenote }}
+                                                :
+                                            </strong>
+                                            {{ id.contentnote }}
+                                            <a type="button" class="close" aria-label="Close" href="{{ path('delete_note', { 'id': id.id }) }}">
+                                                <span aria-hidden="true">&times;</span>
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4 col-sm-4 col-md-5 col-lg-5 col-xl-4 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    notification_important
+                                </span>&nbsp;Notifications</div>
+                            <div class="simplebloccontent blocksize">
+
+                        <table>
+                            {% if newsstate == NULL %}
+                                Pas de Notifications.
+                                {% else %}
+                                    {% for id in newsstate %}
+                                    <tr class="notif">
+                                    <td><span>⚠ article n°{{ id.id }} à publier</span></td>
+                                    </tr>
+                                    {% endfor %}
+                            {% endif %}        
+                        </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-8 col-sm-8 col-md-7 col-lg-7 col-xl-4 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    folder_shared
+                                </span>&nbsp;documents partagés</div>
+                            <div class="simplebloccontent freesize">
+                                {{ (form(formdoc)) }}
+                                <hr>
+
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <button
+                                                    class="btn btn-link"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseOne"
+                                                    aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    <div style="display:flex;align-items:center;">
+                                                        <span class="material-icons">
+                                                            save_alt
+                                                        </span>&nbsp;Mes Documents</div>
+                                                </button>
+                                            </h2>
+                                        </div>
+
+                                        <div
+                                            id="collapseOne"
+                                            class="collapse"
+                                            aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+
+                                                {% if persodoc == NULL %}
+                                                    Aucun document pour le moment.
+                                                {% else %}
+                                                    {% for id in persodoc %}
+                                                        -
+                                                        <b>
+                                                            <a class="secondlink" href="../docs/{{ id.docname }}">{{ id.docname }}</a>
+                                                        </b>&nbsp;<span class="material-icons" style="font-size:10px">open_in_new</span><br>
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button
+                                                    class="btn btn-link collapsed"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseTwo"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    <div style="display:flex;align-items:center;">
+                                                        <span class="material-icons">
+                                                            save_alt
+                                                        </span>&nbsp;Tous les documents</div>
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div
+                                            id="collapseTwo"
+                                            class="collapse"
+                                            aria-labelledby="headingTwo"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                {% if alldocs == NULL %}
+                                                    Aucun document pour le moment.
+                                                {% else %}
+                                                    {% for id in alldocs %}
+                                                        -
+                                                        <b>
+                                                            <a class="secondlink" href="../docs/{{ id.docname }}">{{ id.docname }}</a>
+                                                        </b>&nbsp;<span class="material-icons" style="font-size:10px">open_in_new</span><br>
+                                                    {% endfor %}
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    edit
+                                </span>&nbsp;éditer des documents</div>
+                            <div class="simplebloccontent">
+                               <a href="{{ path('exportpdf') }}" class="secondlink">Tester export PDF</a><br>
+                               Mettre ici les bouttons de téléchargement des fichiers tels que les feuilles de matchs etc..
+                            <br>
+                            Peut etre modifications de fichiers en ligne 
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    {% endblock %}

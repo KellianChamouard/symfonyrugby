@@ -1,0 +1,47 @@
+<ul>
+    <a href="{{ path('home') }}">
+        <li>
+            <span class="material-icons">home</span>Accueil</li>
+    </a>
+    <a href="{{ path('articles') }}">
+        <li>
+            <span class="material-icons">description</span>Articles</li>
+    </a>
+    <a href="{{ path('joueurs') }}">
+        <li>
+            <span class="material-icons">person</span>les joueurs</li>
+    </a>
+    <a href="{{ path('staff') }}">
+        <li>
+            <span class="material-icons">person</span>les staffs</li>
+    </a>
+    <a href="{{ path('dirigeants') }}">
+        <li>
+            <span class="material-icons">person</span>les dirigeants</li>
+    </a>
+    <a href="{{ path('social') }}">
+        <li>
+            <span class="material-icons">people</span>réseaux sociaux</li>
+    </a>
+    <a href="{{ path('saison') }}">
+        <li>
+            <span class="material-icons">event</span>saison</li>
+    </a>
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('utilisateurs') }}">
+            <li>
+                <span class="material-icons">accessibility_new</span>
+                utilisateurs</li>
+        </a>
+        <a href="{{ path('club') }}">
+            <li>
+                <span class="material-icons">settings</span>le club</li>
+        </a>
+
+        <a href="{{ path('site') }}">
+            <li>
+                <span class="material-icons">settings</span>le site</li>
+        </a>
+    {% else %}
+    {% endif %}
+</ul>

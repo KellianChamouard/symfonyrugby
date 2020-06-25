@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '/inc/modal.html.twig' %}
+    {% include '/inc/modaldeco.html.twig' %}
+    {% include '/inc/modalarticle.html.twig' %}
+
+    <div class="leftbar">
+
+        <a href="{{ path('home') }}">
+            <center>
+                {% if site.sitelogo == '' %}
+                    <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                {% else %}
+                    <img src="{{ site.sitelogo }}" class="logo"/>
+                {% endif %}
+            </center><br></a>
+
+        <div class="pagename">administration</div>
+
+        <div class="clubname">
+            {% if club.clubname == '' %}
+                {{ cmsname }}
+                {{ version }}
+            {% else %}
+                {{ club.clubname }}
+            {% endif %}
+        </div>
+
+        {% include 'inc/nav.html.twig' %}
+    </div>
+
+    <div class="block">
+
+        {% include 'inc/navtop.html.twig' %}
+
+        <div class="restpage">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    description
+                                </span>&nbsp;Articles</div>
+                            <table>
+                                <tr>
+                                <th>ID</th>
+                                    <th>TITRE</th>
+                                    <th>CONTENU</th>
+                                    <th>AUTEUR</th>
+                                    <th>DATE</th>
+                                    <th>CATÉGORIE</th>
+                                    <th>PUBLIER</th>
+                                    <th>
+                                        <a href="#" data-toggle="modal" data-target="#exampleModal7">
+                                            <span class="material-icons iconwhite">post_add</span></a>
+                                    </th>
+                                </tr>
+                                {% if allnews != NULL %}
+                                    {% for id in allnews %}
+
+                                        <tr>
+                                        <td>{{ id.id }}</td>
+                                            <td>{{ id.NewsTitle }}</td>
+                                            <td>{{ id.NewsContent|u.truncate(40, '...') }}</td>
+                                            <td>{{ id.NewsAuthor.firstname }}</td>
+                                            <td>{{ id.NewsDate }}</td>
+                                            <td>{{ id.NewsCat }}</td>
+                                            <td>
+                                                {% if id.NewsState == 1 %}
+                                                <a href="{{ path('change_article_state', { 'id': id.id }) }}">
+                                                    <span class="material-icons">check_box</span></a>
+                                                {% else %}
+                                                <a href="{{ path('change_article_state', { 'id': id.id }) }}">
+                                                     <span class="material-icons" style="color:rgb(53, 53, 53);">check_box_outline_blank</span></a>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('delete_article', { 'id': id.id }) }}">
+                                                    <span class="material-icons">
+                                                        delete
+                                                    </span>
+                                                </a>
+
+                                                <a href="#" data-toggle="modal" data-target="#exampleModal7">
+                                                    <span class="material-icons">
+                                                        edit
+                                                    </span>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td>Il n'y a pas d'article pour le moment. Ajoutez-en un !</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                {% endif %}
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endblock %}

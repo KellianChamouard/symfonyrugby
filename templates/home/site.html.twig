@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '/inc/modalsite.html.twig' %}
+        {% include '/inc/modal.html.twig' %}
+            {% include '/inc/modaldeco.html.twig' %}
+    <div class="leftbar">
+
+        <a href="{{ path('home') }}">
+            <center>{% if site.sitelogo == '' %}
+                                                <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                                            {% else %}
+                                                <img src="{{ site.sitelogo }}" class="logo"/>
+                                            {% endif %}</center><br></a>
+
+        <div class="pagename">administration</div>
+
+        <div class="clubname">
+            {% if club.clubname == '' %}
+    {{ cmsname }} {{ version }}
+{% else %}
+{{ club.clubname }}
+{% endif %}
+            </div>
+
+        {% include 'inc/nav.html.twig' %}
+    </div>
+
+    <div class="block">
+
+        {% include 'inc/navtop.html.twig' %}
+
+        <div class="restpage">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    settings
+                                </span>&nbsp;Le Site</div>
+                            <div class="simplebloccontent">
+
+                                <table>
+                                    <tr>
+                                        <td class="infosclub bgwhite">nom du site :</td>
+                                        <td class="infosclubresp">
+                                            {% if club.clubname == '' %}
+                                                Le nom du site correspond à celui du club. Veuillez en insérer un dans la partie Club.
+                                            {% else %}
+                                                {{ club.clubname }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">description du site :</td>
+                                            {% if site.sitedescription == '' %}
+                                            <td class="infosclubresp" style="text-align:right">
+                                                Veuillez définir une description du site.
+                                            {% else %}
+                                            <td class="infosclubresp" style="text-align:justify">
+                                                {{ site.sitedescription }}
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">logo du site :</td>
+                                        <td class="infosclubresp">
+                                        {% if site.sitelogo == '' %}
+                                                Veuillez définir un logo du site.
+                                            {% else %}
+                                                <img src="{{ site.sitelogo }}"/>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub">couleur du site :</td>
+                                        <td class="infosclubresp">
+                                            <div style="color:var(--first-color)">
+                                            {% if site.sitemaincolor == '' %}
+                                                Veuillez définir une couleur principale du site.
+                                            {% else %}
+                                                {{ site.sitemaincolor }}
+                                            {% endif %}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub" style="background-color:white">&nbsp;</td>
+                                        <td class="infosclubresp" style="background-color:white">&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="infosclub" style="background-color:white">&nbsp;</td>
+                                        <td class="infosclubresp" style="background-color:white">
+                                            <a href="#" data-toggle="modal" data-target="#exampleModal3" style="color:var(--first-color)">
+                                                <span class="material-icons iconsheight">
+                                                    edit
+                                                </span>
+                                                ÉDITER LES INFOS
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endblock %}

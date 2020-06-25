@@ -1,0 +1,459 @@
+body {
+    margin: 0;
+    font-family: 'Nanum Gothic', sans-serif;
+    display: flex;
+    background-color: #edeef3;
+}
+
+.leftbar {
+    min-height: 100vh;
+    width: 260px;
+    background-color: rgb(53, 53, 53);
+    color: white;
+    padding: 20px;
+}
+
+.pagename {
+    width: 100%;
+    height: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+}
+
+.clubname {
+    width: 100%;
+    height: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 5px;
+    font-size: 12px;
+    color: rgb(119, 119, 119);
+    margin-bottom: 30px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--first-color);
+}
+
+hr {
+    border-color: rgb(119, 119, 119);
+}
+
+ul {
+    padding-inline-start: 0;
+}
+
+li {
+    list-style: none;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.material-icons {
+    color: var(--first-color);
+}
+
+.userbox {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profilepic {
+    height: 40px;
+    width: 40px;
+    border-radius: 5px;
+}
+
+.rightbox {
+    width: 100%;
+    height: 70px;
+    text-transform: uppercase;
+    font-size: 12px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.listnormal {
+    list-style: none;
+    height: 20px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.rightalign {
+    height: auto;
+}
+
+.iconsheight {
+    font-size: 14px;
+}
+
+.clubcolor {
+    color: var(--first-color);
+}
+
+.logo {
+    max-height: 60px;
+}
+
+.navbar {
+    background-color: rgb(53, 53, 53);
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchzone {
+    display: flex;
+}
+
+#search {
+    padding-bottom: 10px;
+    width: 250px;
+    background: none;
+    border-style: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--first-color);
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+#search:focus {
+    outline: none;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(119, 119, 119);
+    transition: 1s;
+}
+
+.block {
+    display: block;
+    width: 100%;
+}
+
+.restpage {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+
+.padd {
+    padding: 20px;
+}
+
+.simplebloc {
+    background-color: white;
+}
+
+.simplebloctitle {
+    background-color: rgb(53, 53, 53);
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 12px;
+    color:white;
+}
+
+.simplebloccontent {
+    width: 100%;
+    padding: 20px;
+    min-height:310px;
+    text-align: justify;
+    font-size: 12px;
+}
+
+.freesize{
+    min-height:0px;
+}
+
+.blocksize{
+    max-height:310px;
+}
+
+.secondlink {
+    text-decoration: none;
+    color: var(--first-color);
+}
+
+.secondlink:hover {
+    text-decoration: underline;
+}
+
+.alert-clubcolor {
+    background-color: rgb(219, 219, 219);
+    border-color: rgb(219, 219, 219);
+}
+
+.scrollon {
+    overflow: scroll;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0;
+    transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: var(--first-color) !important;
+    outline: none;
+    box-shadow: none;
+}
+
+.alert{
+    border-radius: 0px;
+}
+
+.btn{
+    font-size: 12px;
+}
+
+.float-right{
+    margin-right:0;
+    width: auto;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: var(--first-color);
+    border-color: var(--first-color);
+    border-radius: 0px !important;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: rgb(119, 119, 119);
+    border-color: rgb(119, 119, 119);
+}
+
+table{
+    width:100%;
+    font-size: 12px;
+}
+
+th{
+    background-color:var(--first-color);
+    color:white;
+    height:40px;
+    text-align: center;
+}
+
+tr{
+    background-color:rgb(243, 243, 243);
+    height:40px;
+    text-align: center;
+}
+
+tr img{
+    height:90px !important;
+    width: 80px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+table tr:nth-child(odd){
+    background-color:rgb(219, 219, 219);
+}
+
+.btn-link{
+    color:var(--first-color);
+    font-weight: 500;
+}
+
+.btn-link:hover{
+    color:var(--first-color);
+    text-decoration: none;
+}
+
+.infosclub{
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 10px;
+    text-align: left;
+    width:50%;
+    padding:10px;
+}
+
+.infosclubresp{
+    text-align: right;
+    font-size: 12px;
+    padding:10px;
+}
+
+.nopadd{
+    padding:0px;
+}
+
+.center{
+text-align: center;
+}
+
+.btn-secondary{
+    background-color: rgb(119, 119, 119);
+    border-radius: 0px !important;
+    border-color:rgb(119, 119, 119);
+    color:white;
+}
+
+.btn-secondary:hover{
+    background-color: var(--first-color);
+    border-radius: 0px !important;
+    border-color:var(--first-color);
+}
+
+.modal-content {
+    border-radius: 0px !important;
+    border-color:none !important;
+}
+
+.active{
+    color:var(--first-color);
+}
+
+.iconwhite{
+    color:white;
+}
+
+.connectbox{
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(219, 219, 219);
+    width:400px;
+}
+
+.connectboxtitle {
+    background-color: rgb(243, 243, 243);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(219, 219, 219);
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 12px;
+}
+
+.connectboxcontent {
+    width: 100%;
+    padding: 20px;
+    min-height:310px;
+    text-align: justify;
+    font-size: 12px;
+}
+
+.restpageco {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logoco{
+    height:100px;
+}
+
+.logocobase{
+    height:100px;
+}
+
+
+.bodydark{
+    background-color: rgb(53, 53, 53);
+}
+
+.modalsize{
+    width:400px !important;
+    margin: 50px auto;
+}
+
+.modal-content {
+    width: 0px;
+    height:0px;
+    background-color: red;
+}
+
+.accordion>.card {
+    border-radius: 0px !important;
+}
+
+.custom-file-label::after {
+    content: "Document";
+}
+
+.custom-file-label {
+    border-radius: 0px !important;
+}
+
+.custom-file-label::after {
+    border-radius: 0px !important;
+}
+
+.notif {
+    background-color:white !important; 
+    animation: allblink 2s infinite;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+  @keyframes allblink { 
+  0% { }
+  50% { color:var(--first-color);text-shadow: 3px 0px 10px var(--first-color);} 
+}
+
+.teamlogosmall{
+    height:40px !important;
+    width: auto !important;
+}
+
+.badge-secondary{
+    background-color: rgb(53, 53, 53) !important;
+}
+
+.form-inline .form-control {
+    margin-right:5px !important;
+}

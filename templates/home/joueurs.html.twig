@@ -1,0 +1,920 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% include '/inc/modal.html.twig' %}
+    {% include '/inc/modaldeco.html.twig' %}
+    {% include '/inc/addplayermodal.html.twig' %}
+    <div class="leftbar">
+
+        <a href="{{ path('home') }}">
+            <center>
+                {% if site.sitelogo == '' %}
+                    <img src="{{ asset('../images/rscms.png') }}" class="logo"/>
+                {% else %}
+                    <img src="{{ site.sitelogo }}" class="logo"/>
+                {% endif %}
+            </center><br></a>
+
+        <div class="pagename">administration</div>
+
+        <div class="clubname">
+            {% if club.clubname == '' %}
+                {{ cmsname }}
+                {{ version }}
+            {% else %}
+                {{ club.clubname }}
+            {% endif %}
+        </div>
+        {% include 'inc/nav.html.twig' %}
+    </div>
+
+    <div class="block">
+
+        {% include 'inc/navtop.html.twig' %}
+
+        <div class="restpage">
+
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-12 padd">
+                        <div class="simplebloc">
+                            <div class="simplebloctitle">
+                                <span class="material-icons">
+                                    person
+                                </span>&nbsp;Joueurs
+                            </div>
+
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button
+                                                class="btn btn-link"
+                                                type="button"
+                                                data-toggle="collapse"
+                                                data-target="#collapseOne"
+                                                aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                ARRIÈRES
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div
+                                        id="collapseOne"
+                                        class="collapse"
+                                        aria-labelledby="headingOne"
+                                        data-parent="#accordionExample">
+                                        {% if arrieres == NULL %}
+                                            <div class="card-body">
+                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                    <span class="material-icons">person_add_alt_1</span></a>
+                                            {% else %}
+                                                <div class="card-body nopadd">
+                                                    <table>
+                                                        <tr>
+                                                            <th>PHOTO</th>
+                                                            <th>NOM</th>
+                                                            <th>PRÉNOM</th>
+                                                            <th>LICENCE</th>
+                                                            <th style="text-align:left;">INFOS</th>
+                                                            <th>
+                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                    <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                            </th>
+                                                        </tr>
+                                                        {% for id in arrieres %}
+                                                            <tr>
+                                                                <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                <td>{{ id.PlayerName|upper }}</td>
+                                                                <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                <td>N° :
+                                                                    <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                </td>
+                                                                <td style="text-align:left;">
+                                                                    <br>
+                                                                    Age :
+                                                                    <b>{{ id.PlayerAge }}
+                                                                        ans</b><br>
+                                                                    Poids :
+                                                                    <b>{{ id.PlayerPoids }}
+                                                                        kg</b><br>
+                                                                    Taille :
+                                                                    <b>{{ id.PlayerTaille }}
+                                                                        cm</b><br>
+                                                                    Matchs :
+                                                                    <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                    Éssais :
+                                                                    <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                    Points :
+                                                                    <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                    {% if id.PlayerState == true %}
+                                                                        <b>
+                                                                            <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                    {% else %}<br>{% endif %}
+                                                                </td>
+                                                                <td>
+                                                                    <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                        <span class="material-icons">
+                                                                            delete
+                                                                        </span>
+                                                                    </a>
+                                                                    <a href="{{ path('modif_player', { 'id': id.id }) }}">
+                                                                        <span class="material-icons">
+                                                                            edit
+                                                                        </span>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                    </table>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button
+                                                    class="btn btn-link collapsed"
+                                                    type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#collapseTwo"
+                                                    aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    AILIERS
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div
+                                            id="collapseTwo"
+                                            class="collapse"
+                                            aria-labelledby="headingTwo"
+                                            data-parent="#accordionExample">
+                                            {% if ailiers == NULL %}
+                                                <div class="card-body">
+                                                    <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                        <span class="material-icons">person_add_alt_1</span></a>
+                                                {% else %}
+                                                    <div class="card-body nopadd">
+                                                        <table>
+                                                            <tr>
+                                                                <th>PHOTO</th>
+                                                                <th>NOM</th>
+                                                                <th>PRÉNOM</th>
+                                                                <th>LICENCE</th>
+                                                                <th style="text-align:left;">INFOS</th>
+                                                                <th>
+                                                                    <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                        <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                </th>
+                                                            </tr>
+                                                            {% for id in ailiers %}
+                                                                <tr>
+                                                                    <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                    <td>{{ id.PlayerName|upper }}</td>
+                                                                    <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                    <td>N° :
+                                                                        <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                    </td>
+                                                                    <td style="text-align:left;">
+                                                                        <br>
+                                                                        Age :
+                                                                        <b>{{ id.PlayerAge }}
+                                                                            ans</b><br>
+                                                                        Poids :
+                                                                        <b>{{ id.PlayerPoids }}
+                                                                            kg</b><br>
+                                                                        Taille :
+                                                                        <b>{{ id.PlayerTaille }}
+                                                                            cm</b><br>
+                                                                        Matchs :
+                                                                        <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                        Éssais :
+                                                                        <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                        Points :
+                                                                        <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                        {% if id.PlayerState == true %}
+                                                                            <b>
+                                                                                <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                        {% else %}<br>{% endif %}
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                            <span class="material-icons">
+                                                                                delete
+                                                                            </span>
+                                                                        </a>
+                                                                        <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                            <span class="material-icons">
+                                                                                edit
+                                                                            </span>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </table>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="card-header" id="headingThree">
+                                                <h2 class="mb-0">
+                                                    <button
+                                                        class="btn btn-link collapsed"
+                                                        type="button"
+                                                        data-toggle="collapse"
+                                                        data-target="#collapseThree"
+                                                        aria-expanded="false"
+                                                        aria-controls="collapseThree">
+                                                        CENTRES
+                                                    </button>
+                                                </h2>
+                                            </div>
+                                            <div
+                                                id="collapseThree"
+                                                class="collapse"
+                                                aria-labelledby="headingThree"
+                                                data-parent="#accordionExample">
+                                                {% if centres == NULL %}
+                                                    <div class="card-body">
+                                                        <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                            <span class="material-icons">person_add_alt_1</span></a>
+                                                    {% else %}
+                                                        <div class="card-body nopadd">
+                                                            <table>
+                                                                <tr>
+                                                                    <th>PHOTO</th>
+                                                                    <th>NOM</th>
+                                                                    <th>PRÉNOM</th>
+                                                                    <th>LICENCE</th>
+                                                                    <th style="text-align:left;">INFOS</th>
+                                                                    <th>
+                                                                        <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                            <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                    </th>
+                                                                </tr>
+                                                                {% for id in centres %}
+                                                                    <tr>
+                                                                        <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                        <td>{{ id.PlayerName|upper }}</td>
+                                                                        <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                        <td>N° :
+                                                                            <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                        </td>
+                                                                        <td style="text-align:left;">
+                                                                            <br>
+                                                                            Age :
+                                                                            <b>{{ id.PlayerAge }}
+                                                                                ans</b><br>
+                                                                            Poids :
+                                                                            <b>{{ id.PlayerPoids }}
+                                                                                kg</b><br>
+                                                                            Taille :
+                                                                            <b>{{ id.PlayerTaille }}
+                                                                                cm</b><br>
+                                                                            Matchs :
+                                                                            <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                            Éssais :
+                                                                            <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                            Points :
+                                                                            <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                            {% if id.PlayerState == true %}
+                                                                                <b>
+                                                                                    <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                            {% else %}<br>{% endif %}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                <span class="material-icons">
+                                                                                    delete
+                                                                                </span>
+                                                                            </a>
+                                                                            <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                <span class="material-icons">
+                                                                                    edit
+                                                                                </span>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                            </table>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingFour">
+                                                    <h2 class="mb-0">
+                                                        <button
+                                                            class="btn btn-link collapsed"
+                                                            type="button"
+                                                            data-toggle="collapse"
+                                                            data-target="#collapseFour"
+                                                            aria-expanded="false"
+                                                            aria-controls="collapseFour">
+                                                            DEMIS D'OUVERTURE
+                                                        </button>
+                                                    </h2>
+                                                </div>
+                                                <div
+                                                    id="collapseFour"
+                                                    class="collapse"
+                                                    aria-labelledby="headingFour"
+                                                    data-parent="#accordionExample">
+                                                    {% if demiouvertures == NULL %}
+                                                        <div class="card-body">
+                                                            <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                <span class="material-icons">person_add_alt_1</span></a>
+                                                        {% else %}
+                                                            <div class="card-body nopadd">
+                                                                <table>
+                                                                    <tr>
+                                                                        <th>PHOTO</th>
+                                                                        <th>NOM</th>
+                                                                        <th>PRÉNOM</th>
+                                                                        <th>LICENCE</th>
+                                                                        <th style="text-align:left;">INFOS</th>
+                                                                        <th>
+                                                                            <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                        </th>
+                                                                    </tr>
+                                                                    {% for id in demiouvertures %}
+                                                                        <tr>
+                                                                            <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                            <td>{{ id.PlayerName|upper }}</td>
+                                                                            <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                            <td>N° :
+                                                                                <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                            </td>
+                                                                            <td style="text-align:left;">
+                                                                                <br>
+                                                                                Age :
+                                                                                <b>{{ id.PlayerAge }}
+                                                                                    ans</b><br>
+                                                                                Poids :
+                                                                                <b>{{ id.PlayerPoids }}
+                                                                                    kg</b><br>
+                                                                                Taille :
+                                                                                <b>{{ id.PlayerTaille }}
+                                                                                    cm</b><br>
+                                                                                Matchs :
+                                                                                <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                                Éssais :
+                                                                                <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                                Points :
+                                                                                <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                                {% if id.PlayerState == true %}
+                                                                                    <b>
+                                                                                        <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                                {% else %}<br>{% endif %}
+                                                                            </td>
+                                                                            <td>
+                                                                                <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                    <span class="material-icons">
+                                                                                        delete
+                                                                                    </span>
+                                                                                </a>
+                                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                    <span class="material-icons">
+                                                                                        edit
+                                                                                    </span>
+                                                                                </a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                </table>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header" id="headingFive">
+                                                        <h2 class="mb-0">
+                                                            <button
+                                                                class="btn btn-link collapsed"
+                                                                type="button"
+                                                                data-toggle="collapse"
+                                                                data-target="#collapseFive"
+                                                                aria-expanded="false"
+                                                                aria-controls="collapseFive">
+                                                                DEMIS DE MÊLÉE
+                                                            </button>
+                                                        </h2>
+                                                    </div>
+                                                    <div
+                                                        id="collapseFive"
+                                                        class="collapse"
+                                                        aria-labelledby="headingFive"
+                                                        data-parent="#accordionExample">
+                                                        {% if demimelees == NULL %}
+                                                            <div class="card-body">
+                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                    <span class="material-icons">person_add_alt_1</span></a>
+                                                            {% else %}
+                                                                <div class="card-body nopadd">
+                                                                    <table>
+                                                                        <tr>
+                                                                            <th>PHOTO</th>
+                                                                            <th>NOM</th>
+                                                                            <th>PRÉNOM</th>
+                                                                            <th>LICENCE</th>
+                                                                            <th style="text-align:left;">INFOS</th>
+                                                                            <th>
+                                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                    <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                            </th>
+                                                                        </tr>
+                                                                        {% for id in demimelees %}
+                                                                            <tr>
+                                                                                <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                                <td>{{ id.PlayerName|upper }}</td>
+                                                                                <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                                <td>N° :
+                                                                                    <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                                </td>
+                                                                                <td style="text-align:left;">
+                                                                                    <br>
+                                                                                    Age :
+                                                                                    <b>{{ id.PlayerAge }}
+                                                                                        ans</b><br>
+                                                                                    Poids :
+                                                                                    <b>{{ id.PlayerPoids }}
+                                                                                        kg</b><br>
+                                                                                    Taille :
+                                                                                    <b>{{ id.PlayerTaille }}
+                                                                                        cm</b><br>
+                                                                                    Matchs :
+                                                                                    <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                                    Éssais :
+                                                                                    <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                                    Points :
+                                                                                    <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                                    {% if id.PlayerState == true %}
+                                                                                        <b>
+                                                                                            <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                                    {% else %}<br>{% endif %}
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                        <span class="material-icons">
+                                                                                            delete
+                                                                                        </span>
+                                                                                    </a>
+                                                                                    <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                        <span class="material-icons">
+                                                                                            edit
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        {% endfor %}
+                                                                    </table>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingSix">
+                                                            <h2 class="mb-0">
+                                                                <button
+                                                                    class="btn btn-link collapsed"
+                                                                    type="button"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#collapseSix"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="collapseSix">
+                                                                    TROISIÈMES LIGNE
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div
+                                                            id="collapseSix"
+                                                            class="collapse"
+                                                            aria-labelledby="headingSix"
+                                                            data-parent="#accordionExample">
+                                                            {% if troisiemelignes == NULL %}
+                                                                <div class="card-body">
+                                                                    <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                        <span class="material-icons">person_add_alt_1</span></a>
+                                                                {% else %}
+                                                                    <div class="card-body nopadd">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <th>PHOTO</th>
+                                                                                <th>NOM</th>
+                                                                                <th>PRÉNOM</th>
+                                                                                <th>LICENCE</th>
+                                                                                <th style="text-align:left;">INFOS</th>
+                                                                                <th>
+                                                                                    <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                        <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                                </th>
+                                                                            </tr>
+                                                                            {% for id in troisiemelignes %}
+                                                                                <tr>
+                                                                                    <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                                    <td>{{ id.PlayerName|upper }}</td>
+                                                                                    <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                                    <td>N° :
+                                                                                        <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                                    </td>
+                                                                                    <td style="text-align:left;">
+                                                                                        <br>
+                                                                                        Age :
+                                                                                        <b>{{ id.PlayerAge }}
+                                                                                            ans</b><br>
+                                                                                        Poids :
+                                                                                        <b>{{ id.PlayerPoids }}
+                                                                                            kg</b><br>
+                                                                                        Taille :
+                                                                                        <b>{{ id.PlayerTaille }}
+                                                                                            cm</b><br>
+                                                                                        Matchs :
+                                                                                        <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                                        Éssais :
+                                                                                        <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                                        Points :
+                                                                                        <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                                        {% if id.PlayerState == true %}
+                                                                                            <b>
+                                                                                                <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                                        {% else %}<br>{% endif %}
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                            <span class="material-icons">
+                                                                                                delete
+                                                                                            </span>
+                                                                                        </a>
+                                                                                        <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                            <span class="material-icons">
+                                                                                                edit
+                                                                                            </span>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            {% endfor %}
+                                                                        </table>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card">
+                                                            <div class="card-header" id="headingSeven">
+                                                                <h2 class="mb-0">
+                                                                    <button
+                                                                        class="btn btn-link collapsed"
+                                                                        type="button"
+                                                                        data-toggle="collapse"
+                                                                        data-target="#collapseSeven"
+                                                                        aria-expanded="false"
+                                                                        aria-controls="collapseSeven">
+                                                                        SECONDES LIGNE
+                                                                    </button>
+                                                                </h2>
+                                                            </div>
+                                                            <div
+                                                                id="collapseSeven"
+                                                                class="collapse"
+                                                                aria-labelledby="headingSeven"
+                                                                data-parent="#accordionExample">
+                                                                {% if secondeslignes == NULL %}
+                                                                    <div class="card-body">
+                                                                        <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                            <span class="material-icons">person_add_alt_1</span></a>
+                                                                    {% else %}
+                                                                        <div class="card-body nopadd">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <th>PHOTO</th>
+                                                                                    <th>NOM</th>
+                                                                                    <th>PRÉNOM</th>
+                                                                                    <th>LICENCE</th>
+                                                                                    <th style="text-align:left;">INFOS</th>
+                                                                                    <th>
+                                                                                        <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                            <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                                    </th>
+                                                                                </tr>
+                                                                                {% for id in secondeslignes %}
+                                                                                    <tr>
+                                                                                        <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                                        <td>{{ id.PlayerName|upper }}</td>
+                                                                                        <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                                        <td>N° :
+                                                                                            <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                                        </td>
+                                                                                        <td style="text-align:left;">
+                                                                                            <br>
+                                                                                            Age :
+                                                                                            <b>{{ id.PlayerAge }}
+                                                                                                ans</b><br>
+                                                                                            Poids :
+                                                                                            <b>{{ id.PlayerPoids }}
+                                                                                                kg</b><br>
+                                                                                            Taille :
+                                                                                            <b>{{ id.PlayerTaille }}
+                                                                                                cm</b><br>
+                                                                                            Matchs :
+                                                                                            <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                                            Éssais :
+                                                                                            <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                                            Points :
+                                                                                            <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                                            {% if id.PlayerState == true %}
+                                                                                                <b>
+                                                                                                    <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                                            {% else %}<br>{% endif %}
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                                <span class="material-icons">
+                                                                                                    delete
+                                                                                                </span>
+                                                                                            </a>
+                                                                                            <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                                <span class="material-icons">
+                                                                                                    edit
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                {% endfor %}
+                                                                            </table>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card">
+                                                                <div class="card-header" id="headingHeight">
+                                                                    <h2 class="mb-0">
+                                                                        <button
+                                                                            class="btn btn-link collapsed"
+                                                                            type="button"
+                                                                            data-toggle="collapse"
+                                                                            data-target="#collapseHeight"
+                                                                            aria-expanded="false"
+                                                                            aria-controls="collapseHeight">
+                                                                            PILIERS
+                                                                        </button>
+                                                                    </h2>
+                                                                </div>
+                                                                <div
+                                                                    id="collapseHeight"
+                                                                    class="collapse"
+                                                                    aria-labelledby="headingHeight"
+                                                                    data-parent="#accordionExample">
+                                                                    {% if piliers == NULL %}
+                                                                        <div class="card-body">
+                                                                            <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                <span class="material-icons">person_add_alt_1</span></a>
+                                                                        {% else %}
+                                                                            <div class="card-body nopadd">
+                                                                                <table>
+                                                                                    <tr>
+                                                                                        <th>PHOTO</th>
+                                                                                        <th>NOM</th>
+                                                                                        <th>PRÉNOM</th>
+                                                                                        <th>LICENCE</th>
+                                                                                        <th style="text-align:left;">INFOS</th>
+                                                                                        <th>
+                                                                                            <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                                <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                    {% for id in piliers %}
+                                                                                        <tr>
+                                                                                            <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                                            <td>{{ id.PlayerName|upper }}</td>
+                                                                                            <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                                            <td>N° :
+                                                                                                <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                                            </td>
+                                                                                            <td style="text-align:left;">
+                                                                                                <br>
+                                                                                                Age :
+                                                                                                <b>{{ id.PlayerAge }}
+                                                                                                    ans</b><br>
+                                                                                                Poids :
+                                                                                                <b>{{ id.PlayerPoids }}
+                                                                                                    kg</b><br>
+                                                                                                Taille :
+                                                                                                <b>{{ id.PlayerTaille }}
+                                                                                                    cm</b><br>
+                                                                                                Matchs :
+                                                                                                <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                                                Éssais :
+                                                                                                <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                                                Points :
+                                                                                                <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                                                {% if id.PlayerState == true %}
+                                                                                                    <b>
+                                                                                                        <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                                                {% else %}<br>{% endif %}
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                                    <span class="material-icons">
+                                                                                                        delete
+                                                                                                    </span>
+                                                                                                </a>
+                                                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                                    <span class="material-icons">
+                                                                                                        edit
+                                                                                                    </span>
+                                                                                                </a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    {% endfor %}
+                                                                                </table>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card">
+                                                                    <div class="card-header" id="headingNine">
+                                                                        <h2 class="mb-0">
+                                                                            <button
+                                                                                class="btn btn-link collapsed"
+                                                                                type="button"
+                                                                                data-toggle="collapse"
+                                                                                data-target="#collapseNine"
+                                                                                aria-expanded="false"
+                                                                                aria-controls="collapseNine">
+                                                                                TALONNEURS
+                                                                            </button>
+                                                                        </h2>
+                                                                    </div>
+                                                                    <div
+                                                                        id="collapseNine"
+                                                                        class="collapse"
+                                                                        aria-labelledby="headingNine"
+                                                                        data-parent="#accordionExample">
+                                                                        {% if talonneurs == NULL %}
+                                                                            <div class="card-body">
+                                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                    <span class="material-icons">person_add_alt_1</span></a>
+                                                                            {% else %}
+                                                                                <div class="card-body nopadd">
+                                                                                    <table>
+                                                                                        <tr>
+                                                                                            <th>PHOTO</th>
+                                                                                            <th>NOM</th>
+                                                                                            <th>PRÉNOM</th>
+                                                                                            <th>LICENCE</th>
+                                                                                            <th style="text-align:left;">INFOS</th>
+                                                                                            <th>
+                                                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                                    <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        {% for id in talonneurs %}
+                                                                                            <tr>
+                                                                                                <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                                                <td>{{ id.PlayerName|upper }}</td>
+                                                                                                <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                                                <td>N° :
+                                                                                                    <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                                                </td>
+                                                                                                <td style="text-align:left;">
+                                                                                                    <br>
+                                                                                                    Age :
+                                                                                                    <b>{{ id.PlayerAge }}
+                                                                                                        ans</b><br>
+                                                                                                    Poids :
+                                                                                                    <b>{{ id.PlayerPoids }}
+                                                                                                        kg</b><br>
+                                                                                                    Taille :
+                                                                                                    <b>{{ id.PlayerTaille }}
+                                                                                                        cm</b><br>
+                                                                                                    Matchs :
+                                                                                                    <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                                                    Éssais :
+                                                                                                    <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                                                    Points :
+                                                                                                    <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                                                    {% if id.PlayerState == true %}
+                                                                                                        <b>
+                                                                                                            <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                                                    {% else %}<br>{% endif %}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                                        <span class="material-icons">
+                                                                                                            delete
+                                                                                                        </span>
+                                                                                                    </a>
+                                                                                                    <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                                        <span class="material-icons">
+                                                                                                            edit
+                                                                                                        </span>
+                                                                                                    </a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        {% endfor %}
+                                                                                    </table>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="card">
+                                                                    <div class="card-header" id="headingTen">
+                                                                        <h2 class="mb-0">
+                                                                            <button
+                                                                                class="btn btn-link collapsed"
+                                                                                type="button"
+                                                                                data-toggle="collapse"
+                                                                                data-target="#collapseTen"
+                                                                                aria-expanded="false"
+                                                                                aria-controls="collapseTen">
+                                                                                TOUS LES JOUEURS
+                                                                            </button>
+                                                                        </h2>
+                                                                    </div>
+                                                                    <div
+                                                                        id="collapseTen"
+                                                                        class="collapse"
+                                                                        aria-labelledby="headingTen"
+                                                                        data-parent="#accordionExample">
+                                                                        {% if allplayers == NULL %}
+                                                                            <div class="card-body">
+                                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                    <span class="material-icons">person_add_alt_1</span></a>
+                                                                            {% else %}
+                                                                                <div class="card-body nopadd">
+                                                                                    <table>
+                                                                                        <tr>
+                                                                                            <th>PHOTO</th>
+                                                                                            <th>NOM</th>
+                                                                                            <th>PRÉNOM</th>
+                                                                                            <th>LICENCE</th>
+                                                                                            <th style="text-align:left;">INFOS</th>
+                                                                                            <th>
+                                                                                                <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                                    <span class="material-icons iconwhite">person_add_alt_1</span></a>
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                        {% for id in allplayers %}
+                                                                                            <tr>
+                                                                                                <td><img src="../docs/{{ id.PlayerPhoto }}"/></td>
+                                                                                                <td>{{ id.PlayerName|upper }}</td>
+                                                                                                <td>{{ id.PlayerFirstname|upper }}</td>
+                                                                                                <td>N° :
+                                                                                                    <b>{{ id.PlayerLicenceNumber }}</b>
+                                                                                                </td>
+                                                                                                <td style="text-align:left;">
+                                                                                                    <br>
+                                                                                                    Age :
+                                                                                                    <b>{{ id.PlayerAge }}
+                                                                                                        ans</b><br>
+                                                                                                    Poids :
+                                                                                                    <b>{{ id.PlayerPoids }}
+                                                                                                        kg</b><br>
+                                                                                                    Taille :
+                                                                                                    <b>{{ id.PlayerTaille }}
+                                                                                                        cm</b><br>
+                                                                                                    Matchs :
+                                                                                                    <b>{{ id.PlayerTotalMatch }}</b><br>
+                                                                                                    Éssais :
+                                                                                                    <b>{{ id.PlayerTotalTries }}</b><br>
+                                                                                                    Points :
+                                                                                                    <b>{{ id.PlayerTotalPoints }}</b><br>
+                                                                                                    {% if id.PlayerState == true %}
+                                                                                                        <b>
+                                                                                                            <span style="color:red">Joueur Blessé</span></b><br><br>
+                                                                                                    {% else %}<br>{% endif %}
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a href="{{ path('delete_player', { 'id': id.id }) }}">
+                                                                                                        <span class="material-icons">
+                                                                                                            delete
+                                                                                                        </span>
+                                                                                                    </a>
+                                                                                                    <a href="#" data-toggle="modal" data-target="#exampleModal10">
+                                                                                                        <span class="material-icons">
+                                                                                                            edit
+                                                                                                        </span>
+                                                                                                    </a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        {% endfor %}
+                                                                                    </table>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            {% endblock %}

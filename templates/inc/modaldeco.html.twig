@@ -1,0 +1,25 @@
+<!-- Modal deco -->
+<div
+    class="modal fade"
+    id="exampleModal5"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="simplebloc modalsize">
+                <div class="simplebloctitle">
+                    <span class="material-icons">
+                        person
+                    </span>&nbsp;Déconnexion
+                </div>
+                <div class="simplebloccontent freesize">
+                       Êtes-vous sûr de vouloir vous déconnecter ?<br><br>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">NON</button>
+                <a href="{{ path('app_logout') }}" type="button" class="btn btn-primary">OUI</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

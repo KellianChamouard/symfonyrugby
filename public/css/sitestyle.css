@@ -1,0 +1,158 @@
+body {
+    margin: 0;
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: white;
+    font-size: 14px;
+}
+
+.logo{
+    height:100px
+}
+
+.navbar-dark{
+    background-color: rgb(53, 53, 53) !important;
+}
+
+.bg-dark{
+    background-color: rgb(53, 53, 53) !important;
+}
+
+.nav-item{
+    text-transform: uppercase;
+}
+
+.nav-link:hover{
+    color:var(--first-color) !important;
+}
+
+.carousel-control-prev {
+    background-color: var(--first-color);
+    height: 70px;
+    width: 70px;
+    margin-top: auto;
+    margin-bottom: auto;
+    opacity: 1;
+}
+
+.carousel-control-next {
+    background-color: var(--first-color);
+    height: 70px;
+    width: 70px;
+    margin-top: auto;
+    margin-bottom: auto;
+    opacity: 1;
+}
+
+.carousel-caption a {
+    color: var(--first-color);
+}
+
+.carousel-indicators li {
+    width: 12px;
+    height: 12px;
+    background-color: var(--first-color);
+}
+
+.carousel-indicators:hover {
+    cursor: pointer;
+}
+
+.bg-primary{
+    background-color: var(--first-color) !important;
+}
+
+table {
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position-y: 70%;
+    background-position-x: 50%;
+    border: none;
+    width: 100%;
+    text-transform: uppercase;
+    color: black;
+}
+
+td {
+    border: none;
+    width: auto;
+    height: 45px;
+    padding: 5px;
+    text-align: center;
+    background-color: #ffffff;
+    text-transform: uppercase;
+}
+
+table.color_line tr:nth-child(2n+0) td {
+    background-color: rgba(209, 209, 209, 0.616);
+}
+
+table.color_line tr:nth-child(2n+1) td {
+    background-color: rgba(255, 255, 255, 0.404);
+}
+
+td img {
+    width: 1.7em;
+}
+
+th{
+    background-color: var(--first-color);
+    border: none;
+    width: auto;
+    height: 45px;
+    padding: 5px;
+}
+
+.card {
+    border-radius: 0px;
+}
+
+.sec-nav-link{
+    color: var(--first-color);
+}
+
+.sec-nav-link:hover{
+    color: var(--first-color);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.lead {
+    font-size: 14px;
+}
+
+.navtop{
+    background-color: rgb(53, 53, 53);
+    height:100px;
+    width: 100%;
+    color:white;
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img{
+height:60px;
+}
+
+@media screen and (max-width: 775px) {
+
+    #desc1{
+        display: none;
+    }
+
+    #desc2{
+        display: none;
+    }
+    
+    #desc3{
+        display: none;
+    }
+
+    .logo{
+        justify-content: flex-end;
+    }
+
+  }
